@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /scripts
+Disallow: /public
+Disallow: /css/
+Disallow: /images/
+Disallow: /ui/
+Disallow: /js/
+Disallow: /scripts/
+Disallow: /*?*
+
+Sitemap: https://rushgo.wiki/sitemap.xml
+Sitemap: https://rushgo.wiki/baidusitemap.xml

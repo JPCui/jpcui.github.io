@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>【redis】RedisTemplate的一点疑问 | RushGo</title><meta name="description" content="这是一个连接池的问题，虽说 RedisTemplate ，但实际上是 JedisPool  最近老是看到 redis 从pool里获取&#x2F;释放的频繁操作日志, 跟踪业务发现, 每调用一次 RestTemplate.execute(callback), 都会从连接池里获取jedis连接 频繁获取和释放连接, 会很浪费CPU资源.在获取Jedis时, 会经过下面几个操作:  获取空闲对象(takeOb"><meta name="keywords" content="redis"><meta name="author" content="Sucre Cui"><meta name="copyright" content="Sucre Cui"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://rushgo.wiki/redis/%E3%80%90redis%E3%80%91RedisTemplate%E7%9A%84%E4%B8%80%E7%82%B9%E7%96%91%E9%97%AE/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="【redis】RedisTemplate的一点疑问"><meta property="og:url" content="https://rushgo.wiki/redis/%E3%80%90redis%E3%80%91RedisTemplate%E7%9A%84%E4%B8%80%E7%82%B9%E7%96%91%E9%97%AE/"><meta property="og:site_name" content="RushGo"><meta property="og:description" content="这是一个连接池的问题，虽说 RedisTemplate ，但实际上是 JedisPool  最近老是看到 redis 从pool里获取&#x2F;释放的频繁操作日志, 跟踪业务发现, 每调用一次 RestTemplate.execute(callback), 都会从连接池里获取jedis连接 频繁获取和释放连接, 会很浪费CPU资源.在获取Jedis时, 会经过下面几个操作:  获取空闲对象(takeOb"><meta property="og:image" content="https://avatars.githubusercontent.com/u/8232199?v=4"><meta property="article:published_time" content="2018-11-05T07:11:52.000Z"><meta property="article:modified_time" content="2021-10-25T05:43:13.820Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="【redis】RedisTemplate的一点疑问" href="https://rushgo.wiki/redis/%E3%80%90redis%E3%80%91RedisTemplate%E7%9A%84%E4%B8%80%E7%82%B9%E7%96%91%E9%97%AE/"><link rel="next" title="【spring-boot】如何优雅关闭服务" href="https://rushgo.wiki/spring/%E3%80%90spring-boot%E3%80%91%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%85%B3%E9%97%AD%E6%9C%8D%E5%8A%A1/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.css"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.js" defer></script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c7050af694d7f6c730aff7c4a9220d5e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"SJH4LQXICW","apiKey":"1a9f2fd9a22640a57d06a510bbdb7597","indexName":"github_pages","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容:${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2021-10-25 13:43:13'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="/css/flink.min.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://avatars.githubusercontent.com/u/8232199?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">55</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">34</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 媒体</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/bangumis/"><i class="fa-fw fab fa-youtube"></i><span> 番剧</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw far fa-comment"></i><span> 微语</span></a></div><div class="menus_item"><a class="site-page" href="/contact/"><i class="fa-fw far fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/HCLonely/hclonely.github.io@1.3.9/img/Butterfly/index.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RushGo</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 媒体</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/bangumis/"><i class="fa-fw fab fa-youtube"></i><span> 番剧</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw far fa-comment"></i><span> 微语</span></a></div><div class="menus_item"><a class="site-page" href="/contact/"><i class="fa-fw far fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">【redis】RedisTemplate的一点疑问</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2018-11-05 15:11:52"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2018-11-05</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-10-25 13:43:13"><i class="fas fa-history fa-fw"></i> 更新于 2021-10-25</span></time></div><div class="meta-secondline"></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><blockquote>
+<p>这是一个连接池的问题，虽说 RedisTemplate ，但实际上是 JedisPool</p>
+</blockquote>
+<p>最近老是看到 redis 从pool里获取/释放的频繁操作日志, 跟踪业务发现, 每调用一次 RestTemplate.execute(callback), 都会从连接池里获取jedis连接</p>
+<p>频繁获取和释放连接, 会很浪费CPU资源.<br>在获取Jedis时, 会经过下面几个操作:</p>
+<ul>
+<li>获取空闲对象(takeObject/pollObject)</li>
+<li>激活对象(activateObject)</li>
+<li>检查对象是否可用(testOnBorrow/testOnCreate/validateObject)</li>
+<li>修改统计状态(updateStatsBorrow)</li>
+</ul>
+<p>释放资源时:</p>
+<ul>
+<li>检查对象是否可用(testOnReturn/validateObject)<ul>
+<li>如果不可用, 销毁(destroy), ensureIdle(1, false)</li>
+</ul>
+</li>
+<li>钝化对象(passivateObject), 意思就是刚对象刚被使用过, 让他休息一下</li>
+<li>归还对象(addFirst/addLast)</li>
+<li>修改统计状态(updateStatsBorrow)</li>
+</ul>
+<p>当然你可以把业务放在callback里处理, 但是这样使得callback里的代码变得冗长，感觉又不太爽,<br>所以我们自己把jedis重新封装一下，它的取用全由自己控制，且可以避免<br><code>redis.clients.jedis.exceptions.JedisException: Could not return the resource to the pool</code>异常</p>
+<p>这里来看下rap的一个issue, 值得借鉴:<br><a target="_blank" rel="noopener" href="https://github.com/thx/RAP/pull/1008">https://github.com/thx/RAP/pull/1008</a><br>解决:<br><a target="_blank" rel="noopener" href="https://github.com/thx/RAP/commit/ebd22f2b095b9cb6983a9945e5297a4ace9d439a">https://github.com/thx/RAP/commit/ebd22f2b095b9cb6983a9945e5297a4ace9d439a</a></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Sucre Cui</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://rushgo.wiki/redis/%E3%80%90redis%E3%80%91RedisTemplate%E7%9A%84%E4%B8%80%E7%82%B9%E7%96%91%E9%97%AE/">https://rushgo.wiki/redis/%E3%80%90redis%E3%80%91RedisTemplate%E7%9A%84%E4%B8%80%E7%82%B9%E7%96%91%E9%97%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://rushgo.wiki" target="_blank">RushGo</a>！</span></div></div><!--  转载文章的声明--><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/redis/">redis</a></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/8232199?v=4" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/redis/%E3%80%90redis%E3%80%91RedisTemplate%E7%9A%84%E4%B8%80%E7%82%B9%E7%96%91%E9%97%AE/"><img class="prev-cover" data-src="/" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【redis】RedisTemplate的一点疑问</div></div></a></div><div class="next-post pull-right"><a href="/spring/%E3%80%90spring-boot%E3%80%91%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%85%B3%E9%97%AD%E6%9C%8D%E5%8A%A1/"><img class="next-cover" data-src="/" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【spring-boot】如何优雅关闭服务</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Gitalk"><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><script>function loadGitalk () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+
+  loadScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js', function () {
+    var gitalk = new Gitalk({
+      clientID: 'c4dfb195c9d5f891b270',
+      clientSecret: '6902a3a8ff5d8bf2d9d8518a3f530c71ed24c645',
+      repo: 'jpcui.github.io',
+      owner: 'jpcui',
+      admin: ['jpcui'],
+      id: md5(decodeURI(location.pathname)),
+      language: 'zh-CN',
+      perPage: 20,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    })
+    gitalk.render('gitalk-container')
+  })
+
+  function commentCount(n){
+    try {
+      document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+    } catch (e) {
+      return false
+    }
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || false) {
+  window.addEventListener('load', loadGitalk)
+}
+else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Sucre Cui</div><div class="framework-info"><span>驱动 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></head></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="algolia-search"><div class="search-dialog__title" id="algolia-search-title">Algolia</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/search/algolia.js"></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script></body></html>
