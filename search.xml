@@ -385,27 +385,61 @@
   <entry>
     <title>ahrefs-一款强大的SEO分析工具</title>
     <url>/architecture/ahrefs-for-a-powerful-seo-analysis-tool/</url>
-    <content><![CDATA[<h2 id="site-audit-网站分析"><a href="#site-audit-网站分析" class="headerlink" title="site-audit - 网站分析"></a>site-audit - 网站分析</h2><p>site-audit 会启动爬虫按照爬虫规则来爬取你网站上所有的资源，然后提供整体SEO评分，<br>可视化图表中的关键数据，将标记出所有可能的SEO问题，并提供有关如何解决它们的建议。</p>
-<p>在进行网站分析之前，只需要做一个小小的验证，来证明域名所有权。</p>
-<p>下面简单说一下包含的主要功能：</p>
-<ul>
-<li>概况（Overview）</li>
-</ul>
-<p>概况页面包含几个图表和一个表格。</p>
+    <content><![CDATA[<h1 id="ahrefs-一款强大的SEO分析工具"><a href="#ahrefs-一款强大的SEO分析工具" class="headerlink" title="ahrefs-一款强大的SEO分析工具"></a>ahrefs-一款强大的SEO分析工具</h1><p>ahrefs 提供了帮助你实现SEO的很多有用的功能</p>
+<h2 id="site-audit-网站分析"><a href="#site-audit-网站分析" class="headerlink" title="site-audit - 网站分析"></a>site-audit - 网站分析</h2><p>在刚开始使用 ahrefs 时，site-audit 是最实用的入口功能，它会启动爬虫程序按照爬虫规则来爬取你网站上的资源，然后提供整体SEO评分，<br>让你大致明白你的网站对搜索引擎是不是更加容易被收录和排名。<br>如果你的网站有任何不利于SEO的问题，它会尽可能的标记出来，并提供有关如何解决它们的建议。</p>
+<blockquote>
+<p>在进行网站分析之前，需要做一个小小的验证，来证明域名所有权。<br>不光是ahrefs，在使用百度资源收录、谷歌搜索控制台时，都要验证你的网站所属权。</p>
+</blockquote>
+<p>然后简单介绍一下包含的主要功能。</p>
+<h3 id="概况（Overview）"><a href="#概况（Overview）" class="headerlink" title="概况（Overview）"></a>概况（Overview）</h3><p>概况页面包含几个图表和一个表格。</p>
 <p>图表展示了某次抓取的大致情况，</p>
-<p><img src= "/img/loading.gif" data-src="./assets/ahrefs-overview-charts.jpeg" alt="概况-图表"></p>
+<p><img src= "/img/loading.gif" data-src="/assets/architecture/ahrefs-overview-charts.png" alt="概况-图表"></p>
 <p>表格则详细指出了抓取过程中遇到的问题，通过跟踪每一类问题，找到涉及当前问题的链接，方便我们有针对性的进行改进。</p>
-<p><img src= "/img/loading.gif" data-src="./assets/ahrefs-overview-issue-table.jpeg" alt="概况-问题表格"></p>
+<p><img src= "/img/loading.gif" data-src="/assets/architecture/ahrefs-overview-issue-table.png" alt="概况-问题表格"></p>
 <p>常见的问题有：title字数太少，页面中没有包含 h1 标签，缺少 TDK（title、description、keywords）等等</p>
+<h3 id="抓取日志（Crawl-log）"><a href="#抓取日志（Crawl-log）" class="headerlink" title="*抓取日志（Crawl log）"></a>*抓取日志（Crawl log）</h3><p>查看某一次网站的抓取日志，可以大致看出在抓取过程中，正常抓取的页面和异常抓取的状态分布。</p>
+<p>并且每次网站爬取完成之后，网站诊断都会按类型对问题进行分组，主要的问题类型包括：</p>
 <ul>
-<li>*抓取日志（Crawl log）</li>
+<li>性能：慢速网页，CSS 或 HTML 太大</li>
+<li>HTML 标签：标题标签、元描述和 H1 标签缺失、重复或非最佳长度</li>
+<li>社交标签：Open Graph 标签和 Twitter 卡不完整或缺失</li>
+<li>内容质量：单词数少，散乱的重复网页</li>
+<li> 本地化：全部采用 Hreflang 发布</li>
+<li>导入链接：检测孤独网页、Nofollow 链接的问题</li>
+<li>导出链接：检测到重定向、失效网页的链接</li>
+<li>资源：图像、JavaScript、CSS 有问题</li>
+<li>站外页面</li>
+<li>。。。</li>
 </ul>
-<p>查看某一次网站抓取的情况，可以大致看出在抓取过程中，正常抓取的页面和异常抓取的状态分布。</p>
+<p><img src= "/img/loading.gif" data-src="/assets/architecture/ahrefs-overview-crawl-log.png" alt="概况-爬取日志"></p>
+<p>点击表格中具体问题的<code>[受影响的URLs]</code>按钮，将所有受影响的链接都列出来，我们可以针对每个链接进行排查和解决；</p>
+<p><img src= "/img/loading.gif" data-src="/assets/architecture/ahrefs-tools-data-explorer.png" alt="工具-数据浏览"></p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>当我们有过多次的爬取实践和问题解决之后，在主页面（概要）中，可以查看多次爬取的结果对比:</p>
+<p><img src= "/img/loading.gif" data-src="/assets/architecture/ahrefs-overview.png"></p>
+<p>如上图，三个图表分别反映出了：有问题的页面减少了，健康分数提高了，问题数减少了</p>
+<blockquote>
+<p>第一个图表中间，抓取的链接突然减少，是因为修复了错误的链接，导致了很多页面做了 301 跳转，比如：</p>
+<p><a href="https://rushgo.wiki/demo">https://rushgo.wiki/demo</a></p>
+<p>301 -&gt; <a href="https://rushgo.wiki/demo/">https://rushgo.wiki/demo/</a></p>
+<p>这应该是 hexo 的使用者可能会忽略的问题，如果你不关注SEO问题，可能不会发现</p>
+</blockquote>
+<h2 id="SEO-Toolbar"><a href="#SEO-Toolbar" class="headerlink" title="SEO Toolbar"></a>SEO Toolbar</h2><p><a href="https://ahrefs.com/zh/seo-toolbar">seo-toolbar</a>，浏览器插件，针对当前浏览的网页，提供一些比较有用的 SEO 数据：</p>
 <ul>
-<li></li>
+<li>SEO报告</li>
+<li>断链检查</li>
+<li>内链/外链高亮</li>
+<li>SERP位置</li>
+<li>等等</li>
 </ul>
-<h2 id="site-explorer"><a href="#site-explorer" class="headerlink" title="site-explorer"></a>site-explorer</h2><h3 id="organic-search-自然搜索"><a href="#organic-search-自然搜索" class="headerlink" title="organic search - 自然搜索"></a>organic search - 自然搜索</h3><p>自然</p>
-<h3 id="SEO-Toolbar"><a href="#SEO-Toolbar" class="headerlink" title="SEO Toolbar"></a>SEO Toolbar</h3>]]></content>
+<p>高级版会显示更多内容，等于是一个简化版的SEO监测工具。</p>
+<h2 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h2><p>我们会持续从下面列出的功能中，找出比较实用的功能，并做详细介绍，<br>如果部分功能只是针对国外搜索引擎，就不再深入了解。</p>
+<ul>
+<li>site-explorer - 站点总览</li>
+<li>keywords-explorer - 关键词总览（收费）</li>
+<li>rank-tracker - 排名追踪（收费）</li>
+<li>content-explorer - 内容总览（收费）</li>
+</ul>
+]]></content>
       <tags>
         <tag>SEO</tag>
       </tags>
