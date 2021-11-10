@@ -419,8 +419,8 @@
 <p>如上图，三个图表分别反映出了：有问题的页面减少了，健康分数提高了，问题数减少了</p>
 <blockquote>
 <p>第一个图表中间，抓取的链接突然减少，是因为修复了错误的链接，导致了很多页面做了 301 跳转，比如：</p>
-<p><a href="https://rushgo.wiki/demo">https://rushgo.wiki/demo</a></p>
-<p>301 -&gt; <a href="https://rushgo.wiki/demo/">https://rushgo.wiki/demo/</a></p>
+<p><code>https://rushgo.wiki/demo</code></p>
+<p>301 -&gt; <code>https://rushgo.wiki/demo/</code></p>
 <p>这应该是 hexo 的使用者可能会忽略的问题，如果你不关注SEO问题，可能不会发现</p>
 </blockquote>
 <h2 id="SEO-Toolbar"><a href="#SEO-Toolbar" class="headerlink" title="SEO Toolbar"></a>SEO Toolbar</h2><p><a href="https://ahrefs.com/zh/seo-toolbar">seo-toolbar</a>，浏览器插件，针对当前浏览的网页，提供一些比较有用的 SEO 数据：</p>
