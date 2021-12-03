@@ -6,6 +6,11 @@ Disallow: /images/
 Disallow: /ui/
 Disallow: /js/
 Disallow: /scripts/
+Disallow: /music/
+Disallow: /movies/
+Disallow: /talk/
+Disallow: /contact/
+Disallow: /link/
 Disallow: /*?*
 
 Sitemap: https://rushgo.wiki/sitemap.xml
