@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>【转载】如何写一篇可实施的技术方案？ | RushGo</title><meta name="description" content="转载说明 这篇文章介绍的技术方案比较详细，适合用于交付项目（乙方交付给甲方），如果是一般企业，只是汇报给领导，不需要很详细，可选其中领导主要关注的地方写即可。  一般只需（_背景、目标、现有业务分析、系统整体架构_）   为何要写这篇博文？在日常开发中，老大经常要求我们给出一个完善并合理的技术方案之后才能进行开发。并且要求技术方案一定要细，要重点覆盖监控、异常处理、灰度、降级方案。同时要注重边界"><meta name="keywords" content="技术方案"><meta name="author" content="Sucre Cui"><meta name="copyright" content="Sucre Cui"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://rushgo.wiki/architecture/how-to-write-an-enforceable-tech-proposal/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="【转载】如何写一篇可实施的技术方案？"><meta property="og:url" content="https://rushgo.wiki/architecture/how-to-write-an-enforceable-tech-proposal/"><meta property="og:site_name" content="RushGo"><meta property="og:description" content="转载说明 这篇文章介绍的技术方案比较详细，适合用于交付项目（乙方交付给甲方），如果是一般企业，只是汇报给领导，不需要很详细，可选其中领导主要关注的地方写即可。  一般只需（_背景、目标、现有业务分析、系统整体架构_）   为何要写这篇博文？在日常开发中，老大经常要求我们给出一个完善并合理的技术方案之后才能进行开发。并且要求技术方案一定要细，要重点覆盖监控、异常处理、灰度、降级方案。同时要注重边界"><meta property="og:image" content="https://avatars.githubusercontent.com/u/8232199?v=4"><meta property="article:published_time" content="2022-01-27T09:37:58.000Z"><meta property="article:modified_time" content="2022-01-27T10:24:30.603Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>【转载】如何写一篇可实施的技术方案？ | RushGo</title><meta name="description" content="这篇文章介绍的技术方案比较详细，适合用于交付项目（乙方交付给甲方），如果是一般企业，只是汇报给领导，不需要很详细，可选其中领导主要关注的地方写即可。  一般只需（_背景、目标、现有业务分析、系统整体架构_）   为何要写这篇博文？在日常开发中，老大经常要求我们给出一个完善并合理的技术方案之后才能进行开发。并且要求技术方案一定要细，要重点覆盖监控、异常处理、灰度、降级方案。同时要注重边界处理。最初"><meta name="keywords" content="技术方案"><meta name="author" content="Sucre Cui"><meta name="copyright" content="Sucre Cui"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://rushgo.wiki/architecture/how-to-write-an-enforceable-tech-proposal/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="【转载】如何写一篇可实施的技术方案？"><meta property="og:url" content="https://rushgo.wiki/architecture/how-to-write-an-enforceable-tech-proposal/"><meta property="og:site_name" content="RushGo"><meta property="og:description" content="这篇文章介绍的技术方案比较详细，适合用于交付项目（乙方交付给甲方），如果是一般企业，只是汇报给领导，不需要很详细，可选其中领导主要关注的地方写即可。  一般只需（_背景、目标、现有业务分析、系统整体架构_）   为何要写这篇博文？在日常开发中，老大经常要求我们给出一个完善并合理的技术方案之后才能进行开发。并且要求技术方案一定要细，要重点覆盖监控、异常处理、灰度、降级方案。同时要注重边界处理。最初"><meta property="og:image" content="https://avatars.githubusercontent.com/u/8232199?v=4"><meta property="article:published_time" content="2022-01-27T09:37:58.000Z"><meta property="article:modified_time" content="2022-01-27T10:34:38.106Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
   document.documentElement.setAttribute('data-theme', 'dark')
   if (document.querySelector('meta[name="theme-color"]') !== null) {
     document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
@@ -96,7 +96,7 @@ if (autoChangeMode === '1') {
   isHome: false,
   isHighlightShrink: false,
   isSidebar: true,
-  postUpdate: '2022-01-27 18:24:30'
+  postUpdate: '2022-01-27 18:34:38'
 }</script><noscript><style>
 #nav {
   opacity: 1
@@ -104,8 +104,7 @@ if (autoChangeMode === '1') {
 .justified-gallery img{
   opacity: 1
 }
-</style></noscript><link rel="stylesheet" href="/css/flink.min.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://avatars.githubusercontent.com/u/8232199?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">60</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">39</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 媒体</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/bangumis/"><i class="fa-fw fab fa-youtube"></i><span> 番剧</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw far fa-comment"></i><span> 微语</span></a></div><div class="menus_item"><a class="site-page" href="/contact/"><i class="fa-fw far fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BD%95%E8%A6%81%E5%86%99%E8%BF%99%E7%AF%87%E5%8D%9A%E6%96%87%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">为何要写这篇博文？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E9%94%99%E8%AF%AF%E7%9A%84%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">一个错误的方案设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">重点是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%BF%E6%A8%A1%E6%9D%BF%E8%AF%B4%E8%AF%B4"><span class="toc-number">4.</span> <span class="toc-text">拿模板说说</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/HCLonely/hclonely.github.io@1.3.9/img/Butterfly/index.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RushGo</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 媒体</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/bangumis/"><i class="fa-fw fab fa-youtube"></i><span> 番剧</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw far fa-comment"></i><span> 微语</span></a></div><div class="menus_item"><a class="site-page" href="/contact/"><i class="fa-fw far fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">【转载】如何写一篇可实施的技术方案？</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2022-01-27 17:37:58"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2022-01-27</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2022-01-27 18:24:30"><i class="fas fa-history fa-fw"></i> 更新于 2022-01-27</span></time></div><div class="meta-secondline"></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><blockquote>
-<p>转载说明</p>
+</style></noscript><link rel="stylesheet" href="/css/flink.min.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://avatars.githubusercontent.com/u/8232199?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">60</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">39</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 媒体</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/bangumis/"><i class="fa-fw fab fa-youtube"></i><span> 番剧</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw far fa-comment"></i><span> 微语</span></a></div><div class="menus_item"><a class="site-page" href="/contact/"><i class="fa-fw far fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BD%95%E8%A6%81%E5%86%99%E8%BF%99%E7%AF%87%E5%8D%9A%E6%96%87%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">为何要写这篇博文？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E9%94%99%E8%AF%AF%E7%9A%84%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">一个错误的方案设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">重点是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%BF%E6%A8%A1%E6%9D%BF%E8%AF%B4%E8%AF%B4"><span class="toc-number">4.</span> <span class="toc-text">拿模板说说</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/HCLonely/hclonely.github.io@1.3.9/img/Butterfly/index.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RushGo</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 媒体</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/bangumis/"><i class="fa-fw fab fa-youtube"></i><span> 番剧</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw far fa-comment"></i><span> 微语</span></a></div><div class="menus_item"><a class="site-page" href="/contact/"><i class="fa-fw far fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">【转载】如何写一篇可实施的技术方案？</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2022-01-27 17:37:58"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2022-01-27</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2022-01-27 18:34:38"><i class="fas fa-history fa-fw"></i> 更新于 2022-01-27</span></time></div><div class="meta-secondline"></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><blockquote>
 <p>这篇文章介绍的<strong>技术方案</strong>比较详细，适合用于交付项目（乙方交付给甲方），<br>如果是一般企业，只是汇报给领导，不需要很详细，可选其中领导主要关注的地方写即可。</p>
 <blockquote>
 <p>一般只需（_背景、目标、现有业务分析、系统整体架构_）</p>
@@ -199,124 +198,16 @@ if (autoChangeMode === '1') {
 <li><p>详细设计</p>
 <p> 进入详细设计，就要给出详细的流程图，并用文字描述出流程。用表格给出实体、值对象、域内服务，架构层面做了CQRS的话，这里明确出给出CQRS的职责。</p>
 <p> <strong>xxx实体/域内服务</strong></p>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>类型</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>方法名</td>
-<td>出参</td>
-<td>入参</td>
-</tr>
-<tr>
-<td>—-</td>
-<td>—-</td>
-<td>—-</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>xxx值对象</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>属性</td>
-<td>类型</td>
-<td>备注</td>
-</tr>
-<tr>
-<td>—-</td>
-<td>—-</td>
-<td>—-</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>如果你是<strong>流程改造</strong>，要给出<strong>原有流程和现有流程的对比。</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>若原有流程产生过问题，这里可以给出问题现象、原因，来证明新的流程进行优化原有流程。</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>对于关键部分可以给出伪代码，关键说明要用比较明显的字体样式。</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">|  属性  |	类型 |	备注  |</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">|  方法名  |	出参 |	入参  |</span><br></pre></td></tr></table></figure>
+<p> <strong>xxx值对象</strong></p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| 属性 |	类型 |	备注 |</span><br></pre></td></tr></table></figure>
+<p> 如果你是<strong>流程改造</strong>，要给出<strong>原有流程和现有流程的对比。</strong><br> <strong>若原有流程产生过问题，这里可以给出问题现象、原因，来证明新的流程进行优化原有流程。</strong><br> 对于关键部分可以给出伪代码，关键说明要用比较明显的字体样式。</p>
 </li>
 <li><p>存储设计</p>
 <p> 用表格的形式给出存储结构（包括MySQL、ES、Redis等），说明Schema、字段类型、默认值、描述信息等。</p>
 <p> 表/索引xxx</p>
-<table>
-<thead>
-<tr>
-<th>字段名</th>
-<th>字段类型</th>
-<th>默认值</th>
-<th>是否可空</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| 字段名 |	字段类型 |	默认值 |	是否可空 |	备注 |</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>灰度方案</p>
 <p> 如果你的公司有灰度条件的话（业务有一定流量），用表格给出灰度范围、配置灰度开关的参数、灰度周期。灰度的三个周期：</p>
@@ -326,27 +217,7 @@ if (autoChangeMode === '1') {
 <li>第三周：100%流量，比如全国</li>
 </ol>
 <p> 灰度可以让你在及时出现bug的情况下损失降到最低。</p>
-<table>
-<thead>
-<tr>
-<th>模块</th>
-<th>灰度维度</th>
-<th>配置变更</th>
-<th>灰度周期（1）</th>
-<th>灰度周期（2）</th>
-<th>灰度周期（3）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-</li>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| 模块 |	灰度维度 |	配置变更 |	灰度周期（1） |	灰度周期（2） |	灰度周期（3） |</span><br></pre></td></tr></table></figure></li>
 <li><p>降级方案</p>
 <p> 及时通过灰度跑了很长时间，也不能100%保证你的代码是没有问题的。通常一个业务刚上线很稳定，但是随着时间的推移问题逐渐暴露，原因可能有很多：</p>
 <ol>

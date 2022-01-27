@@ -2053,7 +2053,6 @@
     <title>【转载】如何写一篇可实施的技术方案？</title>
     <url>/architecture/how-to-write-an-enforceable-tech-proposal/</url>
     <content><![CDATA[<blockquote>
-<p>转载说明</p>
 <p>这篇文章介绍的<strong>技术方案</strong>比较详细，适合用于交付项目（乙方交付给甲方），<br>如果是一般企业，只是汇报给领导，不需要很详细，可选其中领导主要关注的地方写即可。</p>
 <blockquote>
 <p>一般只需（_背景、目标、现有业务分析、系统整体架构_）</p>
@@ -2147,124 +2146,16 @@
 <li><p>详细设计</p>
 <p> 进入详细设计，就要给出详细的流程图，并用文字描述出流程。用表格给出实体、值对象、域内服务，架构层面做了CQRS的话，这里明确出给出CQRS的职责。</p>
 <p> <strong>xxx实体/域内服务</strong></p>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>类型</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>方法名</td>
-<td>出参</td>
-<td>入参</td>
-</tr>
-<tr>
-<td>—-</td>
-<td>—-</td>
-<td>—-</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>xxx值对象</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>属性</td>
-<td>类型</td>
-<td>备注</td>
-</tr>
-<tr>
-<td>—-</td>
-<td>—-</td>
-<td>—-</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>如果你是<strong>流程改造</strong>，要给出<strong>原有流程和现有流程的对比。</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>若原有流程产生过问题，这里可以给出问题现象、原因，来证明新的流程进行优化原有流程。</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>对于关键部分可以给出伪代码，关键说明要用比较明显的字体样式。</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">|  属性  |	类型 |	备注  |</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">|  方法名  |	出参 |	入参  |</span><br></pre></td></tr></table></figure>
+<p> <strong>xxx值对象</strong></p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">| 属性 |	类型 |	备注 |</span><br></pre></td></tr></table></figure>
+<p> 如果你是<strong>流程改造</strong>，要给出<strong>原有流程和现有流程的对比。</strong><br> <strong>若原有流程产生过问题，这里可以给出问题现象、原因，来证明新的流程进行优化原有流程。</strong><br> 对于关键部分可以给出伪代码，关键说明要用比较明显的字体样式。</p>
 </li>
 <li><p>存储设计</p>
 <p> 用表格的形式给出存储结构（包括MySQL、ES、Redis等），说明Schema、字段类型、默认值、描述信息等。</p>
 <p> 表/索引xxx</p>
-<table>
-<thead>
-<tr>
-<th>字段名</th>
-<th>字段类型</th>
-<th>默认值</th>
-<th>是否可空</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">| 字段名 |	字段类型 |	默认值 |	是否可空 |	备注 |</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>灰度方案</p>
 <p> 如果你的公司有灰度条件的话（业务有一定流量），用表格给出灰度范围、配置灰度开关的参数、灰度周期。灰度的三个周期：</p>
@@ -2274,27 +2165,7 @@
 <li>第三周：100%流量，比如全国</li>
 </ol>
 <p> 灰度可以让你在及时出现bug的情况下损失降到最低。</p>
-<table>
-<thead>
-<tr>
-<th>模块</th>
-<th>灰度维度</th>
-<th>配置变更</th>
-<th>灰度周期（1）</th>
-<th>灰度周期（2）</th>
-<th>灰度周期（3）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-</li>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">| 模块 |	灰度维度 |	配置变更 |	灰度周期（1） |	灰度周期（2） |	灰度周期（3） |</span><br></pre></td></tr></table></figure></li>
 <li><p>降级方案</p>
 <p> 及时通过灰度跑了很长时间，也不能100%保证你的代码是没有问题的。通常一个业务刚上线很稳定，但是随着时间的推移问题逐渐暴露，原因可能有很多：</p>
 <ol>
