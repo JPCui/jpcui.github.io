@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://rushgo.wiki/architecture/apisix-how-http-to-https/</loc>
-    <lastmod>2021-12-20</lastmod>
+    <loc>https://rushgo.wiki/architecture/how-to-write-an-enforceable-tech-proposal/</loc>
+    <lastmod>2022-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://rushgo.wiki/java/java-tips/</loc>
+    <lastmod>2022-01-27</lastmod>
+  </url>
+  <url>
+    <loc>https://rushgo.wiki/java/readme/</loc>
+    <lastmod>2022-01-14</lastmod>
+  </url>
+  <url>
+    <loc>https://rushgo.wiki/ddd/ddd-qa/</loc>
+    <lastmod>2022-01-07</lastmod>
+  </url>
+  <url>
+    <loc>https://rushgo.wiki/cas/cas-tips/</loc>
+    <lastmod>2022-01-04</lastmod>
   </url>
   <url>
     <loc>https://rushgo.wiki/architecture/how-to-do-seo/</loc>
-    <lastmod>2021-12-19</lastmod>
+    <lastmod>2021-12-20</lastmod>
+  </url>
+  <url>
+    <loc>https://rushgo.wiki/architecture/apisix-how-http-to-https/</loc>
+    <lastmod>2021-12-20</lastmod>
   </url>
   <url>
     <loc>https://rushgo.wiki/js/angular-tips/</loc>
